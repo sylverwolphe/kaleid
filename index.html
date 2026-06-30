@@ -17,6 +17,7 @@
     --teal-bright: #9fe0ea;
     --deep-green: #2c5c46;
     --text-muted: #7e8f8c;
+    --amber: #d8a857;
   }
   *{box-sizing:border-box;}
   html,body{
@@ -26,15 +27,11 @@
     font-family: 'Jost', sans-serif;
     overflow:hidden;
   }
-  .wrap{
-    display:flex; height:100vh; width:100vw;
-  }
+  .wrap{ display:flex; height:100vh; width:100vw; }
   .stage{
     flex:1; position:relative;
     display:flex; align-items:center; justify-content:center;
-    background:
-      radial-gradient(circle at 50% 50%, rgba(111,184,196,0.05), transparent 60%),
-      var(--bg);
+    background: radial-gradient(circle at 50% 50%, rgba(111,184,196,0.05), transparent 60%), var(--bg);
   }
   canvas{
     touch-action:none;
@@ -43,171 +40,114 @@
     border-radius: 2px;
   }
   .panel{
-    width: 280px;
+    width: 300px;
     background: var(--panel);
     border-left: 1px solid var(--line);
-    padding: 22px 20px 20px;
-    display:flex; flex-direction:column; gap:18px;
+    padding: 20px 18px 18px;
+    display:flex; flex-direction:column; gap:16px;
     overflow-y:auto;
   }
   h1{
-    font-family:'Cinzel', serif;
-    font-weight:600;
-    font-size: 19px;
-    letter-spacing: 0.04em;
-    margin: 0 0 2px;
-    color: var(--teal-bright);
+    font-family:'Cinzel', serif; font-weight:600; font-size: 19px;
+    letter-spacing: 0.04em; margin: 0 0 2px; color: var(--teal-bright);
   }
-  .sub{
-    font-size:12px;
-    color: var(--text-muted);
-    margin: 0 0 4px;
-    line-height:1.5;
-  }
-  .section{
-    border-top: 1px solid var(--line);
-    padding-top: 14px;
-    display:flex; flex-direction:column; gap:10px;
-  }
-  .row{
-    display:flex; align-items:center; justify-content:space-between;
-    gap: 10px;
-  }
-  label{
-    font-size: 12px;
-    letter-spacing:0.03em;
-    color: var(--cream);
-    opacity:0.85;
-  }
-  .val{
-    font-size: 12px;
-    color: var(--teal-bright);
-    font-variant-numeric: tabular-nums;
-    min-width: 44px;
-    text-align:right;
-  }
-  input[type=range]{
-    -webkit-appearance:none;
-    width:100%;
-    background:transparent;
-  }
-  input[type=range]::-webkit-slider-runnable-track{
-    height:2px; background: var(--line);
-  }
+  .sub{ font-size:11.5px; color: var(--text-muted); margin: 0; line-height:1.5; }
+  .section{ border-top: 1px solid var(--line); padding-top: 13px; display:flex; flex-direction:column; gap:9px; }
+  .row{ display:flex; align-items:center; justify-content:space-between; gap: 10px; }
+  label{ font-size: 12px; letter-spacing:0.03em; color: var(--cream); opacity:0.85; }
+  .val{ font-size: 12px; color: var(--teal-bright); font-variant-numeric: tabular-nums; min-width: 40px; text-align:right; }
+  input[type=range]{ -webkit-appearance:none; width:100%; background:transparent; }
+  input[type=range]::-webkit-slider-runnable-track{ height:2px; background: var(--line); }
   input[type=range]::-webkit-slider-thumb{
-    -webkit-appearance:none;
-    width:12px; height:12px; border-radius:50%;
-    background: var(--teal-bright);
-    margin-top:-5px;
-    cursor:pointer;
+    -webkit-appearance:none; width:12px; height:12px; border-radius:50%;
+    background: var(--teal-bright); margin-top:-5px; cursor:pointer;
   }
-  .toggle-row{
-    display:flex; align-items:center; justify-content:space-between;
-    cursor:pointer;
-    user-select:none;
-  }
-  .switch{
-    width:34px; height:18px; border-radius:10px;
-    background: var(--panel-2);
-    border:1px solid var(--line);
-    position:relative;
-    transition: background 0.15s;
-  }
+  .toggle-row{ display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; }
+  .switch{ width:34px; height:18px; border-radius:10px; background: var(--panel-2); border:1px solid var(--line); position:relative; transition: background 0.15s; }
   .switch.on{ background: var(--deep-green); }
-  .switch::after{
-    content:'';
-    position:absolute; top:2px; left:2px;
-    width:12px; height:12px; border-radius:50%;
-    background: var(--text-muted);
-    transition: left 0.15s, background 0.15s;
-  }
+  .switch::after{ content:''; position:absolute; top:2px; left:2px; width:12px; height:12px; border-radius:50%; background: var(--text-muted); transition: left 0.15s, background 0.15s; }
   .switch.on::after{ left:18px; background: var(--teal-bright); }
-
-  .swatches{ display:flex; gap:8px; flex-wrap:wrap; }
-  .swatch{
-    width:22px; height:22px; border-radius:50%;
-    border:1.5px solid var(--line);
-    cursor:pointer;
-  }
+  .swatches{ display:flex; gap:7px; flex-wrap:wrap; align-items:center; }
+  .swatch{ width:20px; height:20px; border-radius:50%; border:1.5px solid var(--line); cursor:pointer; flex-shrink:0; }
   .swatch.active{ border-color: var(--teal-bright); }
-  input[type=color]{
-    width:28px; height:22px; border:none; background:none; padding:0; cursor:pointer;
-  }
-
-  .btns{ display:flex; flex-direction:column; gap:8px; }
+  input[type=color]{ width:24px; height:20px; border:none; background:none; padding:0; cursor:pointer; }
+  .btns{ display:flex; flex-direction:column; gap:7px; }
   button{
-    font-family:'Jost', sans-serif;
-    font-size:12.5px;
-    letter-spacing:0.02em;
-    color: var(--cream);
-    background: var(--panel-2);
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    padding: 9px 10px;
-    cursor:pointer;
-    transition: border-color 0.15s, color 0.15s;
+    font-family:'Jost', sans-serif; font-size:12px; letter-spacing:0.02em; color: var(--cream);
+    background: var(--panel-2); border: 1px solid var(--line); border-radius: 3px;
+    padding: 8px 10px; cursor:pointer; transition: border-color 0.15s, color 0.15s;
   }
   button:hover{ border-color: var(--teal); color: var(--teal-bright); }
-  button.primary{
-    background: var(--deep-green);
-    border-color: var(--deep-green);
-    color: var(--cream);
-  }
+  button.primary{ background: var(--deep-green); border-color: var(--deep-green); color: var(--cream); }
   button.primary:hover{ border-color: var(--teal-bright); }
-  .hint{
-    font-size:11px; color:var(--text-muted); line-height:1.5; margin-top:-4px;
+  button:disabled{ opacity:0.35; cursor:not-allowed; }
+  button:disabled:hover{ border-color: var(--line); color: var(--cream); }
+  .hint{ font-size:10.5px; color:var(--text-muted); line-height:1.5; margin-top:-2px; }
+
+  .layerlist{ display:flex; flex-direction:column; gap:5px; }
+  .layerrow{
+    display:flex; align-items:center; gap:8px;
+    padding:7px 8px; border-radius:3px; border:1px solid transparent;
+    cursor:pointer; background: var(--panel-2);
+  }
+  .layerrow.active{ border-color: var(--teal); background: #18262a; }
+  .layerrow .dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .layerrow .lname{ flex:1; font-size:12px; }
+  .layerrow .base-tag{ font-size:9.5px; color: var(--text-muted); letter-spacing:0.05em; }
+  .eye{ width:16px; height:16px; flex-shrink:0; cursor:pointer; opacity:0.8; }
+  .eye.off{ opacity:0.25; }
+  .constraint-note{
+    font-size:11px; color: var(--amber); line-height:1.5;
+    border-left: 2px solid var(--amber); padding-left:8px;
   }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="stage">
-    <canvas id="cv"></canvas>
-  </div>
+  <div class="stage"><canvas id="cv"></canvas></div>
   <div class="panel">
     <div>
       <h1>Kaleidograph</h1>
-      <p class="sub">Draw once, anywhere on the canvas — it mirrors and repeats around the center as you go.</p>
+      <p class="sub">Draw anywhere — it mirrors and repeats around the center. Build layers bottom-up; each new layer can only mark where the layer beneath it has material.</p>
     </div>
 
     <div class="section">
-      <div class="row">
-        <label>Symmetry</label>
-        <span class="val" id="symVal">8-fold</span>
-      </div>
+      <div class="row"><label>Layers</label><span class="val" id="layerCount">1</span></div>
+      <div class="layerlist" id="layerList"></div>
+      <button id="addLayerBtn" class="primary">+ Add layer on top</button>
+      <button id="removeLayerBtn">Remove top layer</button>
+      <div id="constraintNote" class="constraint-note" style="display:none;"></div>
+    </div>
+
+    <div class="section">
+      <div class="row"><label>Step inset</label><span class="val" id="insetVal">1.5</span></div>
+      <input type="range" id="insetRange" min="0" max="10" value="1.5" step="0.5">
+      <p class="hint">How far inside the layer below a new layer must stay — this is the visible terrace step once it's glued and stacked.</p>
+    </div>
+
+    <div class="section">
+      <div class="row"><label>Symmetry</label><span class="val" id="symVal">8-fold</span></div>
       <input type="range" id="symRange" min="2" max="24" value="8" step="1">
-
-      <div class="toggle-row" id="mirrorToggle">
-        <label>Mirror wedges</label>
-        <div class="switch on" id="mirrorSwitch"></div>
-      </div>
-      <div class="toggle-row" id="guideToggle">
-        <label>Show guides</label>
-        <div class="switch on" id="guideSwitch"></div>
-      </div>
-      <div class="toggle-row" id="glowToggle">
-        <label>Glow</label>
-        <div class="switch" id="glowSwitch"></div>
-      </div>
+      <div class="toggle-row" id="mirrorToggle"><label>Mirror wedges</label><div class="switch on" id="mirrorSwitch"></div></div>
+      <div class="toggle-row" id="guideToggle"><label>Show guides</label><div class="switch on" id="guideSwitch"></div></div>
+      <div class="toggle-row" id="glowToggle"><label>Glow</label><div class="switch" id="glowSwitch"></div></div>
+      <div class="toggle-row" id="footprintToggle"><label>Highlight allowed area</label><div class="switch on" id="footprintSwitch"></div></div>
     </div>
 
     <div class="section">
-      <div class="row">
-        <label>Stroke weight</label>
-        <span class="val" id="widthVal">2.5</span>
-      </div>
-      <input type="range" id="widthRange" min="0.5" max="10" value="2.5" step="0.5">
-
+      <div class="row"><label>Stroke weight</label><span class="val" id="widthVal">5.0</span></div>
+      <input type="range" id="widthRange" min="0.5" max="14" value="5" step="0.5">
       <label>Color</label>
       <div class="swatches" id="swatches"></div>
     </div>
 
     <div class="section btns">
-      <button id="undoBtn">Undo last stroke</button>
-      <button id="clearBtn">Clear canvas</button>
-      <button id="pngBtn">Export PNG</button>
-      <button id="svgBtn" class="primary">Export SVG</button>
-      <p class="hint">SVG export keeps every stroke as a real vector path — drop it straight into the box's relief generator.</p>
+      <button id="undoBtn">Undo last stroke (this layer)</button>
+      <button id="clearBtn">Clear this layer</button>
+      <button id="pngBtn">Export PNG (composite)</button>
+      <button id="svgPreviewBtn">Export combined SVG (preview)</button>
+      <button id="svgAllBtn" class="primary">Export all layers (SVG files)</button>
+      <p class="hint">Each layer exports as its own black-stroke SVG, already nested and ready to send to the laser, one sheet per layer.</p>
     </div>
   </div>
 </div>
@@ -215,18 +155,21 @@
 <script>
 const canvas = document.getElementById('cv');
 const ctx = canvas.getContext('2d');
+const palette = ['#f0ead6', '#6fb8c4', '#9fe0ea', '#2c5c46', '#d8a857'];
+const layerAccents = ['#6fb8c4','#9fe0ea','#d8a857','#f0ead6','#7fd1a0','#c98fd6','#e08a6b','#8fb0e0'];
 
-const palette = ['#f0ead6', '#6fb8c4', '#9fe0ea', '#2c5c46', '#1a2422'];
 let state = {
-  n: 8,
-  mirror: true,
-  guides: true,
-  glow: false,
-  color: palette[1],
-  width: 2.5,
-  strokes: [],
+  n: 8, mirror: true, guides: true, glow: false, color: palette[1], width: 5.0,
+  inset: 1.5, footprintHighlight: true,
+  layers: [ {strokes: [], visible:true} ],
+  active: 0,
 };
 let current = null;
+let drawing = false;
+let footprintSegs = null;
+let footprintGrid = null;
+const CELL = 24;
+
 let dpr = Math.max(1, window.devicePixelRatio || 1);
 let size = 0;
 let center = {x:0,y:0};
@@ -234,10 +177,8 @@ let center = {x:0,y:0};
 function resize(){
   const stage = document.querySelector('.stage');
   size = Math.min(stage.clientWidth, stage.clientHeight) * 0.92;
-  canvas.style.width = size+'px';
-  canvas.style.height = size+'px';
-  canvas.width = size*dpr;
-  canvas.height = size*dpr;
+  canvas.style.width = size+'px'; canvas.style.height = size+'px';
+  canvas.width = size*dpr; canvas.height = size*dpr;
   ctx.setTransform(dpr,0,0,dpr,0,0);
   center = {x:size/2, y:size/2};
   redraw();
@@ -253,61 +194,137 @@ function transformPoint(p, angleOffset, mirror){
   return {x: center.x + r*Math.cos(a), y: center.y + r*Math.sin(a)};
 }
 
+function expandStroke(stroke){
+  const out = [];
+  for(let k=0;k<state.n;k++){
+    const angleOffset = k*2*Math.PI/state.n;
+    const mirrors = state.mirror ? [false,true] : [false];
+    for(const m of mirrors){
+      out.push(stroke.points.map(p=>transformPoint(p, angleOffset, m)));
+    }
+  }
+  return out;
+}
+
+// ---------- footprint (constraint) handling ----------
+function buildFootprint(layerIndex){
+  if(layerIndex < 0) { footprintSegs = null; footprintGrid = null; return; }
+  const segs = [];
+  const grid = new Map();
+  const layer = state.layers[layerIndex];
+  for(const s of layer.strokes){
+    const copies = expandStroke(s);
+    for(const pts of copies){
+      for(let i=0;i<pts.length-1;i++){
+        const seg = {x1:pts[i].x,y1:pts[i].y,x2:pts[i+1].x,y2:pts[i+1].y, hw:s.width/2};
+        const idx = segs.length;
+        segs.push(seg);
+        const minx = Math.min(seg.x1,seg.x2)-seg.hw, maxx = Math.max(seg.x1,seg.x2)+seg.hw;
+        const miny = Math.min(seg.y1,seg.y2)-seg.hw, maxy = Math.max(seg.y1,seg.y2)+seg.hw;
+        for(let gx=Math.floor(minx/CELL); gx<=Math.floor(maxx/CELL); gx++){
+          for(let gy=Math.floor(miny/CELL); gy<=Math.floor(maxy/CELL); gy++){
+            const key = gx+'_'+gy;
+            if(!grid.has(key)) grid.set(key, []);
+            grid.get(key).push(idx);
+          }
+        }
+      }
+    }
+  }
+  footprintSegs = segs;
+  footprintGrid = grid;
+}
+
+function distPointSeg(px,py,x1,y1,x2,y2){
+  const dx=x2-x1, dy=y2-y1;
+  const len2 = dx*dx+dy*dy;
+  let t = len2>0 ? ((px-x1)*dx+(py-y1)*dy)/len2 : 0;
+  t = Math.max(0, Math.min(1,t));
+  const cx = x1+t*dx, cy = y1+t*dy;
+  return Math.hypot(px-cx, py-cy);
+}
+
+function isAllowed(px,py){
+  if(state.active===0) return true;
+  if(!footprintSegs || footprintSegs.length===0) return false;
+  const gx = Math.floor(px/CELL), gy = Math.floor(py/CELL);
+  for(let ix=gx-1;ix<=gx+1;ix++){
+    for(let iy=gy-1;iy<=gy+1;iy++){
+      const key = ix+'_'+iy;
+      const list = footprintGrid.get(key);
+      if(!list) continue;
+      for(const idx of list){
+        const seg = footprintSegs[idx];
+        const allowedR = Math.max(0, seg.hw - state.inset);
+        if(allowedR<=0) continue;
+        if(distPointSeg(px,py,seg.x1,seg.y1,seg.x2,seg.y2) <= allowedR) return true;
+      }
+    }
+  }
+  return false;
+}
+
+// ---------- drawing ----------
 function drawPath(points, color, width, glow){
   if(points.length < 2) return;
   ctx.beginPath();
   ctx.moveTo(points[0].x, points[0].y);
   for(let i=1;i<points.length;i++) ctx.lineTo(points[i].x, points[i].y);
-  ctx.strokeStyle = color;
-  ctx.lineWidth = width;
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-  if(glow){
-    ctx.shadowColor = color;
-    ctx.shadowBlur = 12;
-  } else {
-    ctx.shadowBlur = 0;
-  }
+  ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineCap='round'; ctx.lineJoin='round';
+  if(glow){ ctx.shadowColor = color; ctx.shadowBlur = 12; } else { ctx.shadowBlur = 0; }
   ctx.stroke();
 }
 
-function drawStrokeSymmetric(stroke){
-  for(let k=0;k<state.n;k++){
-    const angleOffset = k*2*Math.PI/state.n;
-    drawPath(stroke.points.map(p=>transformPoint(p, angleOffset, false)), stroke.color, stroke.width, state.glow);
-    if(state.mirror){
-      drawPath(stroke.points.map(p=>transformPoint(p, angleOffset, true)), stroke.color, stroke.width, state.glow);
-    }
+function drawStrokeSymmetric(stroke, alpha){
+  ctx.globalAlpha = alpha;
+  const copies = expandStroke(stroke);
+  for(const pts of copies) drawPath(pts, stroke.color, stroke.width, state.glow);
+  ctx.globalAlpha = 1;
+}
+
+function drawFootprintHighlight(){
+  if(!footprintSegs || footprintSegs.length===0) return;
+  ctx.save();
+  ctx.globalAlpha = 0.16;
+  ctx.shadowBlur = 0;
+  ctx.strokeStyle = '#9fe0ea';
+  ctx.lineCap='round'; ctx.lineJoin='round';
+  for(const seg of footprintSegs){
+    const allowedR = Math.max(0, seg.hw-state.inset);
+    if(allowedR<=0) continue;
+    ctx.lineWidth = allowedR*2;
+    ctx.beginPath();
+    ctx.moveTo(seg.x1,seg.y1); ctx.lineTo(seg.x2,seg.y2);
+    ctx.stroke();
   }
+  ctx.restore();
 }
 
 function drawGuides(){
-  ctx.save();
-  ctx.shadowBlur = 0;
-  ctx.strokeStyle = 'rgba(111,184,196,0.16)';
-  ctx.lineWidth = 1;
+  ctx.save(); ctx.shadowBlur=0;
+  ctx.strokeStyle='rgba(111,184,196,0.16)'; ctx.lineWidth=1;
   const R = size*0.72;
   for(let k=0;k<state.n;k++){
     const a = k*2*Math.PI/state.n;
-    ctx.beginPath();
-    ctx.moveTo(center.x, center.y);
-    ctx.lineTo(center.x+R*Math.cos(a), center.y+R*Math.sin(a));
-    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(center.x,center.y);
+    ctx.lineTo(center.x+R*Math.cos(a), center.y+R*Math.sin(a)); ctx.stroke();
   }
-  ctx.beginPath();
-  ctx.arc(center.x, center.y, 3, 0, 7);
-  ctx.fillStyle = 'rgba(159,224,234,0.5)';
-  ctx.fill();
+  ctx.beginPath(); ctx.arc(center.x,center.y,3,0,7);
+  ctx.fillStyle='rgba(159,224,234,0.5)'; ctx.fill();
   ctx.restore();
 }
 
 function redraw(){
   ctx.clearRect(0,0,size,size);
-  ctx.fillStyle = '#0a0f0d';
-  ctx.fillRect(0,0,size,size);
+  ctx.fillStyle = '#0a0f0d'; ctx.fillRect(0,0,size,size);
   if(state.guides) drawGuides();
-  for(const s of state.strokes) drawStrokeSymmetric(s);
-  if(current) drawStrokeSymmetric(current);
+  if(state.active>0 && state.footprintHighlight) drawFootprintHighlight();
+  state.layers.forEach((layer, i)=>{
+    if(!layer.visible) return;
+    const alpha = (i===state.active) ? 1.0 : 0.32;
+    for(const s of layer.strokes) drawStrokeSymmetric(s, alpha);
+  });
+  if(current) drawStrokeSymmetric(current, 1.0);
 }
 
 function getPos(e){
@@ -317,47 +334,147 @@ function getPos(e){
   return {x: cx, y: cy};
 }
 
-let drawing = false;
+function commitCurrent(){
+  if(current && current.points.length>1){
+    state.layers[state.active].strokes.push(current);
+  }
+  current = null;
+}
+
+let lastRawPos = null;
+
 canvas.addEventListener('pointerdown', (e)=>{
   drawing = true;
-  current = {points:[getPos(e)], color: state.color, width: state.width};
+  buildFootprint(state.active-1);
+  const p = getPos(e);
+  lastRawPos = p;
+  if(isAllowed(p.x,p.y)){
+    current = {points:[p], color: state.color, width: state.width};
+  } else {
+    current = null;
+  }
   canvas.setPointerCapture(e.pointerId);
 });
 canvas.addEventListener('pointermove', (e)=>{
   if(!drawing) return;
-  current.points.push(getPos(e));
+  const p = getPos(e);
+  const from = lastRawPos || p;
+  const dist = Math.hypot(p.x-from.x, p.y-from.y);
+  const steps = Math.max(1, Math.ceil(dist/1.5));
+  for(let i=1;i<=steps;i++){
+    const t = i/steps;
+    const ip = {x: from.x+(p.x-from.x)*t, y: from.y+(p.y-from.y)*t};
+    if(isAllowed(ip.x,ip.y)){
+      if(!current) current = {points:[ip], color: state.color, width: state.width};
+      else current.points.push(ip);
+    } else {
+      commitCurrent();
+    }
+  }
+  lastRawPos = p;
   redraw();
 });
 function endStroke(){
   if(!drawing) return;
   drawing = false;
-  if(current && current.points.length>1) state.strokes.push(current);
-  current = null;
+  commitCurrent();
   redraw();
 }
 canvas.addEventListener('pointerup', endStroke);
 canvas.addEventListener('pointerleave', endStroke);
 
+// ---------- layer panel ----------
+function renderLayerList(){
+  const list = document.getElementById('layerList');
+  list.innerHTML='';
+  for(let i=state.layers.length-1;i>=0;i--){
+    const layer = state.layers[i];
+    const row = document.createElement('div');
+    row.className = 'layerrow' + (i===state.active?' active':'');
+    const dot = document.createElement('div');
+    dot.className='dot'; dot.style.background = layerAccents[i%layerAccents.length];
+    const name = document.createElement('div');
+    name.className='lname';
+    name.textContent = 'Layer ' + (i+1) + (i===state.layers.length-1 && i>0 ? '' : '');
+    const tag = document.createElement('div');
+    tag.className='base-tag';
+    tag.textContent = i===0 ? 'BASE' : ('rests on ' + i);
+    const eye = document.createElement('div');
+    eye.className = 'eye' + (layer.visible?'':' off');
+    eye.innerHTML = layer.visible
+      ? '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#9fe0ea" stroke-width="1.6"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>'
+      : '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#7e8f8c" stroke-width="1.6"><path d="M3 3l18 18M10.6 10.6a3 3 0 0 0 4.2 4.2M9.9 5.1A11 11 0 0 1 23 12s-1.2 2.1-3.3 3.9M6.3 6.3C3.7 8 1 12 1 12a11 11 0 0 0 5 5.4"/></svg>';
+    eye.addEventListener('click', (ev)=>{ ev.stopPropagation(); layer.visible=!layer.visible; renderLayerList(); redraw(); });
+    row.appendChild(dot); row.appendChild(name); row.appendChild(tag); row.appendChild(eye);
+    row.addEventListener('click', ()=>{ setActive(i); });
+    list.appendChild(row);
+  }
+  document.getElementById('layerCount').textContent = state.layers.length;
+  document.getElementById('removeLayerBtn').disabled = state.layers.length<=1;
+  const note = document.getElementById('constraintNote');
+  if(state.active>0){
+    note.style.display='block';
+    const belowWidth = state.layers[state.active-1].strokes.length
+      ? Math.max(...state.layers[state.active-1].strokes.map(s=>s.width)) : 0;
+    if(belowWidth>0 && belowWidth/2 - state.inset <= 0){
+      note.textContent = 'Step inset (' + state.inset + ') is wider than layer ' + state.active + '\'s strokes allow — nothing will be drawable. Lower the inset or thicken layer ' + state.active + '.';
+    } else {
+      note.textContent = 'Drawing on layer ' + (state.active+1) + ': marks only take where layer ' + state.active + ' has material (highlighted).';
+    }
+  } else {
+    note.style.display='none';
+  }
+}
+
+function setActive(i){
+  state.active = i;
+  buildFootprint(state.active-1);
+  renderLayerList();
+  redraw();
+}
+
+document.getElementById('addLayerBtn').addEventListener('click', ()=>{
+  state.layers.push({strokes:[], visible:true});
+  setActive(state.layers.length-1);
+});
+document.getElementById('removeLayerBtn').addEventListener('click', ()=>{
+  if(state.layers.length<=1) return;
+  state.layers.pop();
+  setActive(state.layers.length-1);
+});
+
+// ---------- controls ----------
 const symRange = document.getElementById('symRange');
 const symVal = document.getElementById('symVal');
 symRange.addEventListener('input', ()=>{
   state.n = parseInt(symRange.value);
   symVal.textContent = state.n + '-fold';
+  buildFootprint(state.active-1);
   redraw();
 });
-
 function setupToggle(rowId, switchId, key){
   const row = document.getElementById(rowId);
   const sw = document.getElementById(switchId);
   row.addEventListener('click', ()=>{
     state[key] = !state[key];
     sw.classList.toggle('on', state[key]);
+    if(key==='mirror') buildFootprint(state.active-1);
     redraw();
   });
 }
 setupToggle('mirrorToggle','mirrorSwitch','mirror');
 setupToggle('guideToggle','guideSwitch','guides');
 setupToggle('glowToggle','glowSwitch','glow');
+setupToggle('footprintToggle','footprintSwitch','footprintHighlight');
+
+const insetRange = document.getElementById('insetRange');
+const insetVal = document.getElementById('insetVal');
+insetRange.addEventListener('input', ()=>{
+  state.inset = parseFloat(insetRange.value);
+  insetVal.textContent = state.inset;
+  renderLayerList();
+  redraw();
+});
 
 const widthRange = document.getElementById('widthRange');
 const widthVal = document.getElementById('widthVal');
@@ -367,33 +484,29 @@ widthRange.addEventListener('input', ()=>{
 });
 
 const swatchWrap = document.getElementById('swatches');
-palette.forEach((c,i)=>{
+palette.forEach((c)=>{
   const d = document.createElement('div');
   d.className = 'swatch' + (c===state.color?' active':'');
   d.style.background = c;
   d.addEventListener('click', ()=>{
     state.color = c;
-    [...swatchWrap.children].forEach(ch=>ch.classList.remove('active'));
+    [...swatchWrap.children].forEach(ch=>ch.classList && ch.classList.remove('active'));
     d.classList.add('active');
     custom.value = c;
   });
   swatchWrap.appendChild(d);
 });
 const custom = document.createElement('input');
-custom.type = 'color';
-custom.value = state.color;
-custom.addEventListener('input', ()=>{
-  state.color = custom.value;
-  [...swatchWrap.children].forEach(ch=>ch.classList.remove('active'));
-});
+custom.type='color'; custom.value = state.color;
+custom.addEventListener('input', ()=>{ state.color = custom.value; });
 swatchWrap.appendChild(custom);
 
 document.getElementById('undoBtn').addEventListener('click', ()=>{
-  state.strokes.pop();
+  state.layers[state.active].strokes.pop();
   redraw();
 });
 document.getElementById('clearBtn').addEventListener('click', ()=>{
-  state.strokes = [];
+  state.layers[state.active].strokes = [];
   redraw();
 });
 
@@ -404,26 +517,46 @@ document.getElementById('pngBtn').addEventListener('click', ()=>{
   link.click();
 });
 
-document.getElementById('svgBtn').addEventListener('click', ()=>{
+function layerSVGBody(layer, strokeColorOverride){
   let paths = '';
-  for(const s of state.strokes){
-    for(let k=0;k<state.n;k++){
-      const angleOffset = k*2*Math.PI/state.n;
-      [false, ...(state.mirror?[true]:[])].forEach(mirror=>{
-        const pts = s.points.map(p=>transformPoint(p, angleOffset, mirror));
-        const d = 'M ' + pts.map(p=>p.x.toFixed(2)+' '+p.y.toFixed(2)).join(' L ');
-        paths += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.width}" stroke-linecap="round" stroke-linejoin="round"/>\n`;
-      });
+  for(const s of layer.strokes){
+    const copies = expandStroke(s);
+    for(const pts of copies){
+      const d = 'M ' + pts.map(p=>p.x.toFixed(2)+' '+p.y.toFixed(2)).join(' L ');
+      const col = strokeColorOverride || s.color;
+      paths += `<path d="${d}" fill="none" stroke="${col}" stroke-width="${s.width}" stroke-linecap="round" stroke-linejoin="round"/>\n`;
     }
   }
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">\n<rect width="${size}" height="${size}" fill="#0a0f0d"/>\n${paths}</svg>`;
+  return paths;
+}
+
+function downloadSVG(filename, bodyContent, bg){
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">\n` +
+    (bg?`<rect width="${size}" height="${size}" fill="${bg}"/>\n`:'') + bodyContent + `</svg>`;
   const blob = new Blob([svg], {type:'image/svg+xml'});
   const link = document.createElement('a');
-  link.download = 'kaleidograph.svg';
+  link.download = filename;
   link.href = URL.createObjectURL(blob);
   link.click();
+}
+
+document.getElementById('svgPreviewBtn').addEventListener('click', ()=>{
+  let body = '';
+  state.layers.forEach((layer,i)=>{
+    body += `<g id="layer-${i+1}">\n` + layerSVGBody(layer, null) + `</g>\n`;
+  });
+  downloadSVG('kaleidograph-combined.svg', body, '#0a0f0d');
 });
 
+document.getElementById('svgAllBtn').addEventListener('click', async ()=>{
+  for(let i=0;i<state.layers.length;i++){
+    const body = layerSVGBody(state.layers[i], '#000000');
+    downloadSVG('kaleidograph-layer-' + (i+1) + '.svg', body, null);
+    await new Promise(r=>setTimeout(r, 250));
+  }
+});
+
+setActive(0);
 resize();
 </script>
 </body>
