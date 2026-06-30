@@ -8,60 +8,26 @@
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:wght@400;500&display=swap');
 
   :root{
-    --bg: #0a0f0d;
-    --panel: #11181a;
-    --panel-2: #161f21;
-    --line: #233030;
-    --cream: #f0ead6;
-    --teal: #6fb8c4;
-    --teal-bright: #9fe0ea;
-    --deep-green: #2c5c46;
-    --text-muted: #7e8f8c;
-    --amber: #d8a857;
+    --bg: #0a0f0d; --panel: #11181a; --panel-2: #161f21; --line: #233030;
+    --cream: #f0ead6; --teal: #6fb8c4; --teal-bright: #9fe0ea;
+    --deep-green: #2c5c46; --text-muted: #7e8f8c; --amber: #d8a857;
   }
   *{box-sizing:border-box;}
-  html,body{
-    margin:0; padding:0; height:100%;
-    background: var(--bg);
-    color: var(--cream);
-    font-family: 'Jost', sans-serif;
-    overflow:hidden;
-  }
+  html,body{ margin:0; padding:0; height:100%; background: var(--bg); color: var(--cream); font-family: 'Jost', sans-serif; overflow:hidden; }
   .wrap{ display:flex; height:100vh; width:100vw; }
-  .stage{
-    flex:1; position:relative;
-    display:flex; align-items:center; justify-content:center;
-    background: radial-gradient(circle at 50% 50%, rgba(111,184,196,0.05), transparent 60%), var(--bg);
-  }
-  canvas{
-    touch-action:none;
-    cursor: crosshair;
-    box-shadow: 0 0 0 1px var(--line), 0 0 60px rgba(111,184,196,0.06);
-    border-radius: 2px;
-  }
-  .panel{
-    width: 300px;
-    background: var(--panel);
-    border-left: 1px solid var(--line);
-    padding: 20px 18px 18px;
-    display:flex; flex-direction:column; gap:16px;
-    overflow-y:auto;
-  }
-  h1{
-    font-family:'Cinzel', serif; font-weight:600; font-size: 19px;
-    letter-spacing: 0.04em; margin: 0 0 2px; color: var(--teal-bright);
-  }
+  .stage{ flex:1; position:relative; display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(circle at 50% 50%, rgba(111,184,196,0.05), transparent 60%), var(--bg); }
+  canvas{ touch-action:none; cursor: crosshair; box-shadow: 0 0 0 1px var(--line), 0 0 60px rgba(111,184,196,0.06); border-radius: 2px; }
+  .panel{ width: 312px; background: var(--panel); border-left: 1px solid var(--line); padding: 18px 16px; display:flex; flex-direction:column; gap:14px; overflow-y:auto; }
+  h1{ font-family:'Cinzel', serif; font-weight:600; font-size: 19px; letter-spacing: 0.04em; margin: 0 0 2px; color: var(--teal-bright); }
   .sub{ font-size:11.5px; color: var(--text-muted); margin: 0; line-height:1.5; }
-  .section{ border-top: 1px solid var(--line); padding-top: 13px; display:flex; flex-direction:column; gap:9px; }
+  .section{ border-top: 1px solid var(--line); padding-top: 12px; display:flex; flex-direction:column; gap:9px; }
   .row{ display:flex; align-items:center; justify-content:space-between; gap: 10px; }
   label{ font-size: 12px; letter-spacing:0.03em; color: var(--cream); opacity:0.85; }
   .val{ font-size: 12px; color: var(--teal-bright); font-variant-numeric: tabular-nums; min-width: 40px; text-align:right; }
   input[type=range]{ -webkit-appearance:none; width:100%; background:transparent; }
   input[type=range]::-webkit-slider-runnable-track{ height:2px; background: var(--line); }
-  input[type=range]::-webkit-slider-thumb{
-    -webkit-appearance:none; width:12px; height:12px; border-radius:50%;
-    background: var(--teal-bright); margin-top:-5px; cursor:pointer;
-  }
+  input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:12px; height:12px; border-radius:50%; background: var(--teal-bright); margin-top:-5px; cursor:pointer; }
   .toggle-row{ display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; }
   .switch{ width:34px; height:18px; border-radius:10px; background: var(--panel-2); border:1px solid var(--line); position:relative; transition: background 0.15s; }
   .switch.on{ background: var(--deep-green); }
@@ -72,34 +38,29 @@
   .swatch.active{ border-color: var(--teal-bright); }
   input[type=color]{ width:24px; height:20px; border:none; background:none; padding:0; cursor:pointer; }
   .btns{ display:flex; flex-direction:column; gap:7px; }
-  button{
-    font-family:'Jost', sans-serif; font-size:12px; letter-spacing:0.02em; color: var(--cream);
-    background: var(--panel-2); border: 1px solid var(--line); border-radius: 3px;
-    padding: 8px 10px; cursor:pointer; transition: border-color 0.15s, color 0.15s;
-  }
+  button{ font-family:'Jost', sans-serif; font-size:12px; letter-spacing:0.02em; color: var(--cream); background: var(--panel-2); border: 1px solid var(--line); border-radius: 3px; padding: 8px 10px; cursor:pointer; transition: border-color 0.15s, color 0.15s; }
   button:hover{ border-color: var(--teal); color: var(--teal-bright); }
   button.primary{ background: var(--deep-green); border-color: var(--deep-green); color: var(--cream); }
   button.primary:hover{ border-color: var(--teal-bright); }
   button:disabled{ opacity:0.35; cursor:not-allowed; }
   button:disabled:hover{ border-color: var(--line); color: var(--cream); }
   .hint{ font-size:10.5px; color:var(--text-muted); line-height:1.5; margin-top:-2px; }
-
   .layerlist{ display:flex; flex-direction:column; gap:5px; }
-  .layerrow{
-    display:flex; align-items:center; gap:8px;
-    padding:7px 8px; border-radius:3px; border:1px solid transparent;
-    cursor:pointer; background: var(--panel-2);
-  }
+  .layerrow{ display:flex; align-items:center; gap:8px; padding:7px 8px; border-radius:3px; border:1px solid transparent; cursor:pointer; background: var(--panel-2); }
   .layerrow.active{ border-color: var(--teal); background: #18262a; }
   .layerrow .dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
   .layerrow .lname{ flex:1; font-size:12px; }
   .layerrow .base-tag{ font-size:9.5px; color: var(--text-muted); letter-spacing:0.05em; }
   .eye{ width:16px; height:16px; flex-shrink:0; cursor:pointer; opacity:0.8; }
   .eye.off{ opacity:0.25; }
-  .constraint-note{
-    font-size:11px; color: var(--amber); line-height:1.5;
-    border-left: 2px solid var(--amber); padding-left:8px;
-  }
+  .constraint-note{ font-size:11px; color: var(--amber); line-height:1.5; border-left: 2px solid var(--amber); padding-left:8px; }
+  .brushgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+  .brushbtn{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:9px 4px; background:var(--panel-2); border:1px solid var(--line); border-radius:4px; cursor:pointer; }
+  .brushbtn.active{ border-color: var(--teal-bright); background:#18262a; }
+  .brushbtn svg{ width:20px; height:20px; }
+  .brushbtn span{ font-size:10px; color:var(--text-muted); }
+  .brushbtn.active span{ color: var(--teal-bright); }
+  .brush-params{ display:flex; flex-direction:column; gap:9px; }
 </style>
 </head>
 <body>
@@ -108,7 +69,13 @@
   <div class="panel">
     <div>
       <h1>Kaleidograph</h1>
-      <p class="sub">Draw anywhere — it mirrors and repeats around the center. Build layers bottom-up; each new layer can only mark where the layer beneath it has material.</p>
+      <p class="sub">Pick a brush, drag to shape it, release to commit. Nested layers only keep what lands on the layer below.</p>
+    </div>
+
+    <div class="section">
+      <label>Brush</label>
+      <div class="brushgrid" id="brushGrid"></div>
+      <div class="brush-params" id="brushParams"></div>
     </div>
 
     <div class="section">
@@ -122,12 +89,12 @@
     <div class="section">
       <div class="row"><label>Step inset</label><span class="val" id="insetVal">1.5</span></div>
       <input type="range" id="insetRange" min="0" max="10" value="1.5" step="0.5">
-      <p class="hint">How far inside the layer below a new layer must stay — this is the visible terrace step once it's glued and stacked.</p>
+      <p class="hint">How far inside the layer below a new layer must stay — the visible terrace once it's glued and stacked.</p>
     </div>
 
     <div class="section">
-      <div class="row"><label>Symmetry</label><span class="val" id="symVal">8-fold</span></div>
-      <input type="range" id="symRange" min="2" max="24" value="8" step="1">
+      <div class="row"><label>Symmetry</label><span class="val" id="symVal">4-fold</span></div>
+      <input type="range" id="symRange" min="1" max="24" value="4" step="1">
       <div class="toggle-row" id="mirrorToggle"><label>Mirror wedges</label><div class="switch on" id="mirrorSwitch"></div></div>
       <div class="toggle-row" id="guideToggle"><label>Show guides</label><div class="switch on" id="guideSwitch"></div></div>
       <div class="toggle-row" id="glowToggle"><label>Glow</label><div class="switch" id="glowSwitch"></div></div>
@@ -135,8 +102,8 @@
     </div>
 
     <div class="section">
-      <div class="row"><label>Stroke weight</label><span class="val" id="widthVal">5.0</span></div>
-      <input type="range" id="widthRange" min="0.5" max="14" value="5" step="0.5">
+      <div class="row"><label>Stroke weight</label><span class="val" id="widthVal">7</span></div>
+      <input type="range" id="widthRange" min="0.5" max="20" value="7" step="0.5">
       <label>Color</label>
       <div class="swatches" id="swatches"></div>
     </div>
@@ -147,7 +114,7 @@
       <button id="pngBtn">Export PNG (composite)</button>
       <button id="svgPreviewBtn">Export combined SVG (preview)</button>
       <button id="svgAllBtn" class="primary">Export all layers (SVG files)</button>
-      <p class="hint">Each layer exports as its own black-stroke SVG, already nested and ready to send to the laser, one sheet per layer.</p>
+      <p class="hint">Each layer exports as its own filled black-silhouette SVG, nested and ready for the laser, one sheet per layer.</p>
     </div>
   </div>
 </div>
@@ -158,21 +125,45 @@ const ctx = canvas.getContext('2d');
 const palette = ['#f0ead6', '#6fb8c4', '#9fe0ea', '#2c5c46', '#d8a857'];
 const layerAccents = ['#6fb8c4','#9fe0ea','#d8a857','#f0ead6','#7fd1a0','#c98fd6','#e08a6b','#8fb0e0'];
 
+const BRUSHES = [
+  {id:'freehand', label:'Freehand'},
+  {id:'straight', label:'Straight'},
+  {id:'spike',    label:'Spike'},
+  {id:'spiral',   label:'Spiral'},
+  {id:'star',     label:'Star'},
+  {id:'rose',     label:'Rose'},
+];
+const BRUSH_ICONS = {
+  freehand: '<path d="M3 17c3-1 4-7 7-9s5 5 8 4" stroke="#9fe0ea" stroke-width="1.6" fill="none" stroke-linecap="round"/>',
+  straight: '<line x1="3" y1="18" x2="18" y2="3" stroke="#9fe0ea" stroke-width="2.2" stroke-linecap="round"/>',
+  spike:    '<path d="M3 18 Q9 14 11 3" stroke="#9fe0ea" stroke-width="2.2" fill="none" stroke-linecap="round"/>',
+  spiral:   '<path d="M11 11 m0,-7 a7,7 0 1,1 -6.06,3.5 a4,4 0 1,1 3.9,2.27" stroke="#9fe0ea" stroke-width="1.6" fill="none" stroke-linecap="round"/>',
+  star:     '<path d="M11 2 L13 8 L19.5 8 L14.3 12 L16.2 18.5 L11 14.6 L5.8 18.5 L7.7 12 L2.5 8 L9 8 Z" stroke="#9fe0ea" stroke-width="1.3" fill="none" stroke-linejoin="round"/>',
+  rose:     '<path d="M11 11 C11 5 16 5 16 11 C16 17 11 17 11 11 C11 5 6 5 6 11 C6 17 11 17 11 11" stroke="#9fe0ea" stroke-width="1.4" fill="none"/>',
+};
+
 let state = {
-  n: 8, mirror: true, guides: true, glow: false, color: palette[1], width: 5.0,
+  n: 4, mirror: true, guides: true, glow: false, color: palette[1], width: 7,
   inset: 1.5, footprintHighlight: true,
   layers: [ {strokes: [], visible:true} ],
   active: 0,
+  brush: 'freehand',
+  taper: true,
+  spiralTurns: 1.3,
+  starPoints: 7,
+  starInner: 0.45,
+  roseK: 5,
 };
-let current = null;
-let drawing = false;
-let footprintSegs = null;
-let footprintGrid = null;
+let footprintSegs = null, footprintGrid = null;
 const CELL = 24;
-
 let dpr = Math.max(1, window.devicePixelRatio || 1);
 let size = 0;
 let center = {x:0,y:0};
+
+let drawing = false;
+let dragAnchor = null;
+let dragPath = [];
+let previewSegs = null;
 
 function resize(){
   const stage = document.querySelector('.stage');
@@ -206,6 +197,43 @@ function expandStroke(stroke){
   return out;
 }
 
+// ---------- ribbon geometry ----------
+function ribbonPolygon(points, widths){
+  const left=[], right=[];
+  const n = points.length;
+  for(let i=0;i<n;i++){
+    let dx,dy;
+    if(i===0){ dx=points[1].x-points[0].x; dy=points[1].y-points[0].y; }
+    else if(i===n-1){ dx=points[i].x-points[i-1].x; dy=points[i].y-points[i-1].y; }
+    else { dx=points[i+1].x-points[i-1].x; dy=points[i+1].y-points[i-1].y; }
+    const len = Math.hypot(dx,dy)||1;
+    const nx=-dy/len, ny=dx/len;
+    const w = Math.max(0,widths[i])/2;
+    left.push({x:points[i].x+nx*w, y:points[i].y+ny*w});
+    right.push({x:points[i].x-nx*w, y:points[i].y-ny*w});
+  }
+  return left.concat(right.reverse());
+}
+
+function drawRibbonFill(points, widths, color, glow, alpha){
+  if(points.length < 2) return;
+  const poly = ribbonPolygon(points, widths);
+  ctx.beginPath();
+  ctx.moveTo(poly[0].x, poly[0].y);
+  for(let i=1;i<poly.length;i++) ctx.lineTo(poly[i].x, poly[i].y);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.globalAlpha = alpha!==undefined?alpha:1;
+  if(glow){ ctx.shadowColor = color; ctx.shadowBlur = 12; } else { ctx.shadowBlur = 0; }
+  ctx.fill();
+  ctx.globalAlpha = 1;
+}
+
+function drawStrokeSymmetric(stroke, alpha){
+  const copies = expandStroke(stroke);
+  for(const pts of copies) drawRibbonFill(pts, stroke.widths, stroke.color, state.glow, alpha);
+}
+
 // ---------- footprint (constraint) handling ----------
 function buildFootprint(layerIndex){
   if(layerIndex < 0) { footprintSegs = null; footprintGrid = null; return; }
@@ -216,11 +244,12 @@ function buildFootprint(layerIndex){
     const copies = expandStroke(s);
     for(const pts of copies){
       for(let i=0;i<pts.length-1;i++){
-        const seg = {x1:pts[i].x,y1:pts[i].y,x2:pts[i+1].x,y2:pts[i+1].y, hw:s.width/2};
+        const hw = (Math.max(0,s.widths[i])+Math.max(0,s.widths[i+1]))/4;
+        const seg = {x1:pts[i].x,y1:pts[i].y,x2:pts[i+1].x,y2:pts[i+1].y, hw};
         const idx = segs.length;
         segs.push(seg);
-        const minx = Math.min(seg.x1,seg.x2)-seg.hw, maxx = Math.max(seg.x1,seg.x2)+seg.hw;
-        const miny = Math.min(seg.y1,seg.y2)-seg.hw, maxy = Math.max(seg.y1,seg.y2)+seg.hw;
+        const minx = Math.min(seg.x1,seg.x2)-hw, maxx = Math.max(seg.x1,seg.x2)+hw;
+        const miny = Math.min(seg.y1,seg.y2)-hw, maxy = Math.max(seg.y1,seg.y2)+hw;
         for(let gx=Math.floor(minx/CELL); gx<=Math.floor(maxx/CELL); gx++){
           for(let gy=Math.floor(miny/CELL); gy<=Math.floor(maxy/CELL); gy++){
             const key = gx+'_'+gy;
@@ -231,8 +260,7 @@ function buildFootprint(layerIndex){
       }
     }
   }
-  footprintSegs = segs;
-  footprintGrid = grid;
+  footprintSegs = segs; footprintGrid = grid;
 }
 
 function distPointSeg(px,py,x1,y1,x2,y2){
@@ -250,8 +278,7 @@ function isAllowed(px,py){
   const gx = Math.floor(px/CELL), gy = Math.floor(py/CELL);
   for(let ix=gx-1;ix<=gx+1;ix++){
     for(let iy=gy-1;iy<=gy+1;iy++){
-      const key = ix+'_'+iy;
-      const list = footprintGrid.get(key);
+      const list = footprintGrid.get(ix+'_'+iy);
       if(!list) continue;
       for(const idx of list){
         const seg = footprintSegs[idx];
@@ -264,38 +291,145 @@ function isAllowed(px,py){
   return false;
 }
 
-// ---------- drawing ----------
-function drawPath(points, color, width, glow){
-  if(points.length < 2) return;
-  ctx.beginPath();
-  ctx.moveTo(points[0].x, points[0].y);
-  for(let i=1;i<points.length;i++) ctx.lineTo(points[i].x, points[i].y);
-  ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineCap='round'; ctx.lineJoin='round';
-  if(glow){ ctx.shadowColor = color; ctx.shadowBlur = 12; } else { ctx.shadowBlur = 0; }
-  ctx.stroke();
+// interpolate a raw drag path so fast movement can't skip a narrow corridor
+function densify(path){
+  if(path.length<2) return path.slice();
+  const out=[path[0]];
+  for(let i=1;i<path.length;i++){
+    const a=path[i-1], b=path[i];
+    const dist = Math.hypot(b.x-a.x,b.y-a.y);
+    const steps = Math.max(1, Math.ceil(dist/1.5));
+    for(let s=1;s<=steps;s++){
+      const t=s/steps;
+      out.push({x:a.x+(b.x-a.x)*t, y:a.y+(b.y-a.y)*t});
+    }
+  }
+  return out;
 }
 
-function drawStrokeSymmetric(stroke, alpha){
-  ctx.globalAlpha = alpha;
-  const copies = expandStroke(stroke);
-  for(const pts of copies) drawPath(pts, stroke.color, stroke.width, state.glow);
-  ctx.globalAlpha = 1;
+function splitByConstraint(points, widths){
+  const segs = [];
+  let curP=null, curW=null;
+  for(let i=0;i<points.length;i++){
+    const p = points[i];
+    if(isAllowed(p.x,p.y)){
+      if(!curP){ curP=[p]; curW=[widths[i]]; }
+      else { curP.push(p); curW.push(widths[i]); }
+    } else {
+      if(curP && curP.length>1) segs.push({points:curP, widths:curW});
+      curP=null; curW=null;
+    }
+  }
+  if(curP && curP.length>1) segs.push({points:curP, widths:curW});
+  return segs;
 }
 
+// ---------- width profiles ----------
+function computeWidths(points){
+  const n = points.length, w0 = state.width;
+  const t = i => n>1 ? i/(n-1) : 0;
+  switch(state.brush){
+    case 'freehand':
+      if(!state.taper) return points.map(()=>w0);
+      return points.map((_,i)=>{ const tt=Math.min(0.985,Math.max(0.015,t(i))); return w0*Math.pow(Math.sin(Math.PI*tt),0.7); });
+    case 'straight':
+      if(!state.taper) return points.map(()=>w0);
+      return points.map((_,i)=>w0*(1-t(i)));
+    case 'spike':
+      return points.map((_,i)=>w0*(1-t(i)));
+    case 'spiral':
+      return points.map((_,i)=>Math.max(0.6, w0*(1-t(i)*0.9)));
+    case 'star': case 'rose':
+      return points.map(()=>w0);
+    default: return points.map(()=>w0);
+  }
+}
+
+// ---------- parametric shape sampling ----------
+function angleOf(a,b){ return Math.atan2(b.y-a.y, b.x-a.x); }
+function distOf(a,b){ return Math.hypot(b.x-a.x, b.y-a.y); }
+
+function sampleShape(){
+  const A = dragAnchor, P = dragPath[dragPath.length-1];
+  if(!A || !P) return [];
+  let pts;
+  switch(state.brush){
+    case 'freehand':
+      pts = dragPath; break;
+    case 'straight':
+      pts = [A, P]; break;
+    case 'spike': {
+      let best=null, bestD=0;
+      for(const pt of dragPath){
+        const along = ((pt.x-A.x)*(P.x-A.x)+(pt.y-A.y)*(P.y-A.y)) / (Math.pow(distOf(A,P),2)||1);
+        const projx = A.x+(P.x-A.x)*along, projy = A.y+(P.y-A.y)*along;
+        const d = Math.hypot(pt.x-projx, pt.y-projy);
+        if(d>bestD){ bestD=d; best=pt; }
+      }
+      const ctrl = best ? {x:A.x+(best.x-A.x)*0.65, y:A.y+(best.y-A.y)*0.65} : {x:(A.x+P.x)/2, y:(A.y+P.y)/2};
+      const raw=[]; const n=28;
+      for(let i=0;i<=n;i++){
+        const tt=i/n, mt=1-tt;
+        raw.push({x: mt*mt*A.x+2*mt*tt*ctrl.x+tt*tt*P.x, y: mt*mt*A.y+2*mt*tt*ctrl.y+tt*tt*P.y});
+      }
+      pts = raw; break;
+    }
+    case 'spiral': {
+      const R = Math.max(4, distOf(A,P));
+      const angEnd = angleOf(A,P);
+      const turns = state.spiralTurns;
+      const r0 = Math.max(2, R*0.05);
+      const ang0 = angEnd - turns*2*Math.PI;
+      const n=90, raw=[];
+      for(let i=0;i<=n;i++){
+        const tt=i/n;
+        const r = r0*Math.pow(R/r0, tt);
+        const a = ang0 + tt*turns*2*Math.PI;
+        raw.push({x:A.x+r*Math.cos(a), y:A.y+r*Math.sin(a)});
+      }
+      pts = raw; break;
+    }
+    case 'star': {
+      const R = Math.max(4, distOf(A,P));
+      const phase = angleOf(A,P);
+      const N = state.starPoints;
+      const rin = R*state.starInner;
+      const raw=[];
+      for(let i=0;i<=N*2;i++){
+        const a = phase + i*Math.PI/N;
+        const r = (i%2===0)?R:rin;
+        raw.push({x:A.x+r*Math.cos(a), y:A.y+r*Math.sin(a)});
+      }
+      pts = raw; break;
+    }
+    case 'rose': {
+      const R = Math.max(4, distOf(A,P));
+      const phase = angleOf(A,P);
+      const k = state.roseK;
+      const span = (k%2===1) ? Math.PI : 2*Math.PI;
+      const n=160, raw=[];
+      for(let i=0;i<=n;i++){
+        const th = i/n*span;
+        const r = R*Math.cos(k*th);
+        raw.push({x:A.x+r*Math.cos(th+phase), y:A.y+r*Math.sin(th+phase)});
+      }
+      pts = raw; break;
+    }
+    default: pts = [];
+  }
+  return densify(pts);
+}
+
+// ---------- rendering ----------
 function drawFootprintHighlight(){
   if(!footprintSegs || footprintSegs.length===0) return;
-  ctx.save();
-  ctx.globalAlpha = 0.16;
-  ctx.shadowBlur = 0;
-  ctx.strokeStyle = '#9fe0ea';
-  ctx.lineCap='round'; ctx.lineJoin='round';
+  ctx.save(); ctx.globalAlpha=0.16; ctx.shadowBlur=0;
+  ctx.strokeStyle='#9fe0ea'; ctx.lineCap='round'; ctx.lineJoin='round';
   for(const seg of footprintSegs){
     const allowedR = Math.max(0, seg.hw-state.inset);
     if(allowedR<=0) continue;
     ctx.lineWidth = allowedR*2;
-    ctx.beginPath();
-    ctx.moveTo(seg.x1,seg.y1); ctx.lineTo(seg.x2,seg.y2);
-    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(seg.x1,seg.y1); ctx.lineTo(seg.x2,seg.y2); ctx.stroke();
   }
   ctx.restore();
 }
@@ -324,7 +458,9 @@ function redraw(){
     const alpha = (i===state.active) ? 1.0 : 0.32;
     for(const s of layer.strokes) drawStrokeSymmetric(s, alpha);
   });
-  if(current) drawStrokeSymmetric(current, 1.0);
+  if(previewSegs){
+    for(const seg of previewSegs) drawStrokeSymmetric({points:seg.points, widths:seg.widths, color: state.color}, 1.0);
+  }
 }
 
 function getPos(e){
@@ -334,54 +470,83 @@ function getPos(e){
   return {x: cx, y: cy};
 }
 
-function commitCurrent(){
-  if(current && current.points.length>1){
-    state.layers[state.active].strokes.push(current);
-  }
-  current = null;
-}
-
-let lastRawPos = null;
-
 canvas.addEventListener('pointerdown', (e)=>{
   drawing = true;
   buildFootprint(state.active-1);
   const p = getPos(e);
-  lastRawPos = p;
-  if(isAllowed(p.x,p.y)){
-    current = {points:[p], color: state.color, width: state.width};
-  } else {
-    current = null;
-  }
+  dragAnchor = p; dragPath = [p]; previewSegs = null;
   canvas.setPointerCapture(e.pointerId);
 });
 canvas.addEventListener('pointermove', (e)=>{
   if(!drawing) return;
   const p = getPos(e);
-  const from = lastRawPos || p;
-  const dist = Math.hypot(p.x-from.x, p.y-from.y);
-  const steps = Math.max(1, Math.ceil(dist/1.5));
-  for(let i=1;i<=steps;i++){
-    const t = i/steps;
-    const ip = {x: from.x+(p.x-from.x)*t, y: from.y+(p.y-from.y)*t};
-    if(isAllowed(ip.x,ip.y)){
-      if(!current) current = {points:[ip], color: state.color, width: state.width};
-      else current.points.push(ip);
-    } else {
-      commitCurrent();
-    }
-  }
-  lastRawPos = p;
+  dragPath.push(p);
+  const shapePts = sampleShape();
+  const widths = computeWidths(shapePts);
+  previewSegs = splitByConstraint(shapePts, widths);
   redraw();
 });
 function endStroke(){
   if(!drawing) return;
   drawing = false;
-  commitCurrent();
+  if(previewSegs){
+    for(const seg of previewSegs){
+      state.layers[state.active].strokes.push({points: seg.points, widths: seg.widths, color: state.color});
+    }
+  }
+  previewSegs = null; dragPath = []; dragAnchor = null;
   redraw();
 }
 canvas.addEventListener('pointerup', endStroke);
 canvas.addEventListener('pointerleave', endStroke);
+
+// ---------- brush panel ----------
+function renderBrushGrid(){
+  const grid = document.getElementById('brushGrid');
+  grid.innerHTML='';
+  BRUSHES.forEach(b=>{
+    const el = document.createElement('div');
+    el.className = 'brushbtn' + (state.brush===b.id?' active':'');
+    el.innerHTML = `<svg viewBox="0 0 22 22">${BRUSH_ICONS[b.id]}</svg><span>${b.label}</span>`;
+    el.addEventListener('click', ()=>{ state.brush=b.id; renderBrushGrid(); renderBrushParams(); });
+    grid.appendChild(el);
+  });
+}
+
+function renderBrushParams(){
+  const wrap = document.getElementById('brushParams');
+  wrap.innerHTML = '';
+  function taperToggleRow(){
+    const row = document.createElement('div');
+    row.className = 'toggle-row';
+    row.innerHTML = `<label>Taper ends</label><div class="switch ${state.taper?'on':''}"></div>`;
+    row.addEventListener('click', ()=>{ state.taper=!state.taper; renderBrushParams(); });
+    wrap.appendChild(row);
+  }
+  function sliderRow(labelText, key, min, max, step, fmt){
+    const row = document.createElement('div');
+    row.className='row';
+    row.innerHTML = `<label>${labelText}</label><span class="val">${fmt?fmt(state[key]):state[key]}</span>`;
+    wrap.appendChild(row);
+    const input = document.createElement('input');
+    input.type='range'; input.min=min; input.max=max; input.step=step; input.value=state[key];
+    input.addEventListener('input', ()=>{
+      state[key] = parseFloat(input.value);
+      row.querySelector('.val').textContent = fmt?fmt(state[key]):state[key];
+    });
+    wrap.appendChild(input);
+  }
+  if(state.brush==='freehand' || state.brush==='straight') taperToggleRow();
+  if(state.brush==='spiral') sliderRow('Turns','spiralTurns',0.3,3,0.1,v=>v.toFixed(1));
+  if(state.brush==='star'){
+    sliderRow('Points','starPoints',3,16,1);
+    sliderRow('Inner ratio','starInner',0.1,0.9,0.05,v=>v.toFixed(2));
+  }
+  if(state.brush==='rose') sliderRow('Petal k','roseK',2,12,1);
+  if(wrap.children.length===0){
+    wrap.innerHTML = '<p class="hint">Drag from center outward to size and rotate this shape.</p>';
+  }
+}
 
 // ---------- layer panel ----------
 function renderLayerList(){
@@ -394,11 +559,9 @@ function renderLayerList(){
     const dot = document.createElement('div');
     dot.className='dot'; dot.style.background = layerAccents[i%layerAccents.length];
     const name = document.createElement('div');
-    name.className='lname';
-    name.textContent = 'Layer ' + (i+1) + (i===state.layers.length-1 && i>0 ? '' : '');
+    name.className='lname'; name.textContent = 'Layer ' + (i+1);
     const tag = document.createElement('div');
-    tag.className='base-tag';
-    tag.textContent = i===0 ? 'BASE' : ('rests on ' + i);
+    tag.className='base-tag'; tag.textContent = i===0 ? 'BASE' : ('rests on ' + i);
     const eye = document.createElement('div');
     eye.className = 'eye' + (layer.visible?'':' off');
     eye.innerHTML = layer.visible
@@ -414,9 +577,9 @@ function renderLayerList(){
   const note = document.getElementById('constraintNote');
   if(state.active>0){
     note.style.display='block';
-    const belowWidth = state.layers[state.active-1].strokes.length
-      ? Math.max(...state.layers[state.active-1].strokes.map(s=>s.width)) : 0;
-    if(belowWidth>0 && belowWidth/2 - state.inset <= 0){
+    const belowStrokes = state.layers[state.active-1].strokes;
+    const belowMaxW = belowStrokes.length ? Math.max(...belowStrokes.map(s=>Math.max(...s.widths))) : 0;
+    if(belowMaxW>0 && belowMaxW/2 - state.inset <= 0){
       note.textContent = 'Step inset (' + state.inset + ') is wider than layer ' + state.active + '\'s strokes allow — nothing will be drawable. Lower the inset or thicken layer ' + state.active + '.';
     } else {
       note.textContent = 'Drawing on layer ' + (state.active+1) + ': marks only take where layer ' + state.active + ' has material (highlighted).';
@@ -480,7 +643,7 @@ const widthRange = document.getElementById('widthRange');
 const widthVal = document.getElementById('widthVal');
 widthRange.addEventListener('input', ()=>{
   state.width = parseFloat(widthRange.value);
-  widthVal.textContent = state.width.toFixed(1);
+  widthVal.textContent = state.width;
 });
 
 const swatchWrap = document.getElementById('swatches');
@@ -517,14 +680,14 @@ document.getElementById('pngBtn').addEventListener('click', ()=>{
   link.click();
 });
 
-function layerSVGBody(layer, strokeColorOverride){
+function layerSVGBody(layer, fillOverride){
   let paths = '';
   for(const s of layer.strokes){
     const copies = expandStroke(s);
     for(const pts of copies){
-      const d = 'M ' + pts.map(p=>p.x.toFixed(2)+' '+p.y.toFixed(2)).join(' L ');
-      const col = strokeColorOverride || s.color;
-      paths += `<path d="${d}" fill="none" stroke="${col}" stroke-width="${s.width}" stroke-linecap="round" stroke-linejoin="round"/>\n`;
+      const poly = ribbonPolygon(pts, s.widths);
+      const d = 'M ' + poly.map(p=>p.x.toFixed(2)+' '+p.y.toFixed(2)).join(' L ') + ' Z';
+      paths += `<path d="${d}" fill="${fillOverride||s.color}"/>\n`;
     }
   }
   return paths;
@@ -542,9 +705,7 @@ function downloadSVG(filename, bodyContent, bg){
 
 document.getElementById('svgPreviewBtn').addEventListener('click', ()=>{
   let body = '';
-  state.layers.forEach((layer,i)=>{
-    body += `<g id="layer-${i+1}">\n` + layerSVGBody(layer, null) + `</g>\n`;
-  });
+  state.layers.forEach((layer,i)=>{ body += `<g id="layer-${i+1}">\n` + layerSVGBody(layer, null) + `</g>\n`; });
   downloadSVG('kaleidograph-combined.svg', body, '#0a0f0d');
 });
 
@@ -556,6 +717,8 @@ document.getElementById('svgAllBtn').addEventListener('click', async ()=>{
   }
 });
 
+renderBrushGrid();
+renderBrushParams();
 setActive(0);
 resize();
 </script>
