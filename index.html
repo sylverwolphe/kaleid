@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaleidograph — symmetry pattern studio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:wght@400;500&display=swap');
+
+  :root{
+    --bg: #0a0f0d;
+    --panel: #11181a;
+    --panel-2: #161f21;
+    --line: #233030;
+    --cream: #f0ead6;
+    --teal: #6fb8c4;
+    --teal-bright: #9fe0ea;
+    --deep-green: #2c5c46;
+    --text-muted: #7e8f8c;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; padding:0; height:100%;
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    overflow:hidden;
+  }
+  .wrap{
+    display:flex; height:100vh; width:100vw;
+  }
+  .stage{
+    flex:1; position:relative;
+    display:flex; align-items:center; justify-content:center;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(111,184,196,0.05), transparent 60%),
+      var(--bg);
+  }
+  canvas{
+    touch-action:none;
+    cursor: crosshair;
+    box-shadow: 0 0 0 1px var(--line), 0 0 60px rgba(111,184,196,0.06);
+    border-radius: 2px;
+  }
+  .panel{
+    width: 280px;
+    background: var(--panel);
+    border-left: 1px solid var(--line);
+    padding: 22px 20px 20px;
+    display:flex; flex-direction:column; gap:18px;
+    overflow-y:auto;
+  }
+  h1{
+    font-family:'Cinzel', serif;
+    font-weight:600;
+    font-size: 19px;
+    letter-spacing: 0.04em;
+    margin: 0 0 2px;
+    color: var(--teal-bright);
+  }
+  .sub{
+    font-size:12px;
+    color: var(--text-muted);
+    margin: 0 0 4px;
+    line-height:1.5;
+  }
+  .section{
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .row{
+    display:flex; align-items:center; justify-content:space-between;
+    gap: 10px;
+  }
+  label{
+    font-size: 12px;
+    letter-spacing:0.03em;
+    color: var(--cream);
+    opacity:0.85;
+  }
+  .val{
+    font-size: 12px;
+    color: var(--teal-bright);
+    font-variant-numeric: tabular-nums;
+    min-width: 44px;
+    text-align:right;
+  }
+  input[type=range]{
+    -webkit-appearance:none;
+    width:100%;
+    background:transparent;
+  }
+  input[type=range]::-webkit-slider-runnable-track{
+    height:2px; background: var(--line);
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:12px; height:12px; border-radius:50%;
+    background: var(--teal-bright);
+    margin-top:-5px;
+    cursor:pointer;
+  }
+  .toggle-row{
+    display:flex; align-items:center; justify-content:space-between;
+    cursor:pointer;
+    user-select:none;
+  }
+  .switch{
+    width:34px; height:18px; border-radius:10px;
+    background: var(--panel-2);
+    border:1px solid var(--line);
+    position:relative;
+    transition: background 0.15s;
+  }
+  .switch.on{ background: var(--deep-green); }
+  .switch::after{
+    content:'';
+    position:absolute; top:2px; left:2px;
+    width:12px; height:12px; border-radius:50%;
+    background: var(--text-muted);
+    transition: left 0.15s, background 0.15s;
+  }
+  .switch.on::after{ left:18px; background: var(--teal-bright); }
+
+  .swatches{ display:flex; gap:8px; flex-wrap:wrap; }
+  .swatch{
+    width:22px; height:22px; border-radius:50%;
+    border:1.5px solid var(--line);
+    cursor:pointer;
+  }
+  .swatch.active{ border-color: var(--teal-bright); }
+  input[type=color]{
+    width:28px; height:22px; border:none; background:none; padding:0; cursor:pointer;
+  }
+
+  .btns{ display:flex; flex-direction:column; gap:8px; }
+  button{
+    font-family:'Jost', sans-serif;
+    font-size:12.5px;
+    letter-spacing:0.02em;
+    color: var(--cream);
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 9px 10px;
+    cursor:pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  button:hover{ border-color: var(--teal); color: var(--teal-bright); }
+  button.primary{
+    background: var(--deep-green);
+    border-color: var(--deep-green);
+    color: var(--cream);
+  }
+  button.primary:hover{ border-color: var(--teal-bright); }
+  .hint{
+    font-size:11px; color:var(--text-muted); line-height:1.5; margin-top:-4px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="stage">
+    <canvas id="cv"></canvas>
+  </div>
+  <div class="panel">
+    <div>
+      <h1>Kaleidograph</h1>
+      <p class="sub">Draw once, anywhere on the canvas — it mirrors and repeats around the center as you go.</p>
+    </div>
+
+    <div class="section">
+      <div class="row">
+        <label>Symmetry</label>
+        <span class="val" id="symVal">8-fold</span>
+      </div>
+      <input type="range" id="symRange" min="2" max="24" value="8" step="1">
+
+      <div class="toggle-row" id="mirrorToggle">
+        <label>Mirror wedges</label>
+        <div class="switch on" id="mirrorSwitch"></div>
+      </div>
+      <div class="toggle-row" id="guideToggle">
+        <label>Show guides</label>
+        <div class="switch on" id="guideSwitch"></div>
+      </div>
+      <div class="toggle-row" id="glowToggle">
+        <label>Glow</label>
+        <div class="switch" id="glowSwitch"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="row">
+        <label>Stroke weight</label>
+        <span class="val" id="widthVal">2.5</span>
+      </div>
+      <input type="range" id="widthRange" min="0.5" max="10" value="2.5" step="0.5">
+
+      <label>Color</label>
+      <div class="swatches" id="swatches"></div>
+    </div>
+
+    <div class="section btns">
+      <button id="undoBtn">Undo last stroke</button>
+      <button id="clearBtn">Clear canvas</button>
+      <button id="pngBtn">Export PNG</button>
+      <button id="svgBtn" class="primary">Export SVG</button>
+      <p class="hint">SVG export keeps every stroke as a real vector path — drop it straight into the box's relief generator.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('cv');
+const ctx = canvas.getContext('2d');
+
+const palette = ['#f0ead6', '#6fb8c4', '#9fe0ea', '#2c5c46', '#1a2422'];
+let state = {
+  n: 8,
+  mirror: true,
+  guides: true,
+  glow: false,
+  color: palette[1],
+  width: 2.5,
+  strokes: [],
+};
+let current = null;
+let dpr = Math.max(1, window.devicePixelRatio || 1);
+let size = 0;
+let center = {x:0,y:0};
+
+function resize(){
+  const stage = document.querySelector('.stage');
+  size = Math.min(stage.clientWidth, stage.clientHeight) * 0.92;
+  canvas.style.width = size+'px';
+  canvas.style.height = size+'px';
+  canvas.width = size*dpr;
+  canvas.height = size*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  center = {x:size/2, y:size/2};
+  redraw();
+}
+window.addEventListener('resize', resize);
+
+function transformPoint(p, angleOffset, mirror){
+  const dx = p.x-center.x, dy = p.y-center.y;
+  const r = Math.hypot(dx,dy);
+  let a = Math.atan2(dy,dx);
+  if(mirror) a = -a;
+  a += angleOffset;
+  return {x: center.x + r*Math.cos(a), y: center.y + r*Math.sin(a)};
+}
+
+function drawPath(points, color, width, glow){
+  if(points.length < 2) return;
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for(let i=1;i<points.length;i++) ctx.lineTo(points[i].x, points[i].y);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  if(glow){
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 12;
+  } else {
+    ctx.shadowBlur = 0;
+  }
+  ctx.stroke();
+}
+
+function drawStrokeSymmetric(stroke){
+  for(let k=0;k<state.n;k++){
+    const angleOffset = k*2*Math.PI/state.n;
+    drawPath(stroke.points.map(p=>transformPoint(p, angleOffset, false)), stroke.color, stroke.width, state.glow);
+    if(state.mirror){
+      drawPath(stroke.points.map(p=>transformPoint(p, angleOffset, true)), stroke.color, stroke.width, state.glow);
+    }
+  }
+}
+
+function drawGuides(){
+  ctx.save();
+  ctx.shadowBlur = 0;
+  ctx.strokeStyle = 'rgba(111,184,196,0.16)';
+  ctx.lineWidth = 1;
+  const R = size*0.72;
+  for(let k=0;k<state.n;k++){
+    const a = k*2*Math.PI/state.n;
+    ctx.beginPath();
+    ctx.moveTo(center.x, center.y);
+    ctx.lineTo(center.x+R*Math.cos(a), center.y+R*Math.sin(a));
+    ctx.stroke();
+  }
+  ctx.beginPath();
+  ctx.arc(center.x, center.y, 3, 0, 7);
+  ctx.fillStyle = 'rgba(159,224,234,0.5)';
+  ctx.fill();
+  ctx.restore();
+}
+
+function redraw(){
+  ctx.clearRect(0,0,size,size);
+  ctx.fillStyle = '#0a0f0d';
+  ctx.fillRect(0,0,size,size);
+  if(state.guides) drawGuides();
+  for(const s of state.strokes) drawStrokeSymmetric(s);
+  if(current) drawStrokeSymmetric(current);
+}
+
+function getPos(e){
+  const rect = canvas.getBoundingClientRect();
+  const cx = (e.touches? e.touches[0].clientX : e.clientX) - rect.left;
+  const cy = (e.touches? e.touches[0].clientY : e.clientY) - rect.top;
+  return {x: cx, y: cy};
+}
+
+let drawing = false;
+canvas.addEventListener('pointerdown', (e)=>{
+  drawing = true;
+  current = {points:[getPos(e)], color: state.color, width: state.width};
+  canvas.setPointerCapture(e.pointerId);
+});
+canvas.addEventListener('pointermove', (e)=>{
+  if(!drawing) return;
+  current.points.push(getPos(e));
+  redraw();
+});
+function endStroke(){
+  if(!drawing) return;
+  drawing = false;
+  if(current && current.points.length>1) state.strokes.push(current);
+  current = null;
+  redraw();
+}
+canvas.addEventListener('pointerup', endStroke);
+canvas.addEventListener('pointerleave', endStroke);
+
+const symRange = document.getElementById('symRange');
+const symVal = document.getElementById('symVal');
+symRange.addEventListener('input', ()=>{
+  state.n = parseInt(symRange.value);
+  symVal.textContent = state.n + '-fold';
+  redraw();
+});
+
+function setupToggle(rowId, switchId, key){
+  const row = document.getElementById(rowId);
+  const sw = document.getElementById(switchId);
+  row.addEventListener('click', ()=>{
+    state[key] = !state[key];
+    sw.classList.toggle('on', state[key]);
+    redraw();
+  });
+}
+setupToggle('mirrorToggle','mirrorSwitch','mirror');
+setupToggle('guideToggle','guideSwitch','guides');
+setupToggle('glowToggle','glowSwitch','glow');
+
+const widthRange = document.getElementById('widthRange');
+const widthVal = document.getElementById('widthVal');
+widthRange.addEventListener('input', ()=>{
+  state.width = parseFloat(widthRange.value);
+  widthVal.textContent = state.width.toFixed(1);
+});
+
+const swatchWrap = document.getElementById('swatches');
+palette.forEach((c,i)=>{
+  const d = document.createElement('div');
+  d.className = 'swatch' + (c===state.color?' active':'');
+  d.style.background = c;
+  d.addEventListener('click', ()=>{
+    state.color = c;
+    [...swatchWrap.children].forEach(ch=>ch.classList.remove('active'));
+    d.classList.add('active');
+    custom.value = c;
+  });
+  swatchWrap.appendChild(d);
+});
+const custom = document.createElement('input');
+custom.type = 'color';
+custom.value = state.color;
+custom.addEventListener('input', ()=>{
+  state.color = custom.value;
+  [...swatchWrap.children].forEach(ch=>ch.classList.remove('active'));
+});
+swatchWrap.appendChild(custom);
+
+document.getElementById('undoBtn').addEventListener('click', ()=>{
+  state.strokes.pop();
+  redraw();
+});
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  state.strokes = [];
+  redraw();
+});
+
+document.getElementById('pngBtn').addEventListener('click', ()=>{
+  const link = document.createElement('a');
+  link.download = 'kaleidograph.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+});
+
+document.getElementById('svgBtn').addEventListener('click', ()=>{
+  let paths = '';
+  for(const s of state.strokes){
+    for(let k=0;k<state.n;k++){
+      const angleOffset = k*2*Math.PI/state.n;
+      [false, ...(state.mirror?[true]:[])].forEach(mirror=>{
+        const pts = s.points.map(p=>transformPoint(p, angleOffset, mirror));
+        const d = 'M ' + pts.map(p=>p.x.toFixed(2)+' '+p.y.toFixed(2)).join(' L ');
+        paths += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.width}" stroke-linecap="round" stroke-linejoin="round"/>\n`;
+      });
+    }
+  }
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">\n<rect width="${size}" height="${size}" fill="#0a0f0d"/>\n${paths}</svg>`;
+  const blob = new Blob([svg], {type:'image/svg+xml'});
+  const link = document.createElement('a');
+  link.download = 'kaleidograph.svg';
+  link.href = URL.createObjectURL(blob);
+  link.click();
+});
+
+resize();
+</script>
+</body>
+</html>
